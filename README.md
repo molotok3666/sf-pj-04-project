@@ -7,11 +7,31 @@ cp .env.example .env
 ```shell
 docker-compose up -d
 ```
-3. Стучимся по URL
-```link
-localhost
+
+3. API запросы
+
+***Получение новостей***
+```bash
+curl --location --request GET 'http://localhost:8080/news/' \
+--header 'Content-Type: application/json'
 ```
-4. API доступно по URL (count - количество новостей)
-```link
-http://localhost/news/{count}
+***Получение конкретной новости (с комментариями)***
+```bash
+curl --location --request GET 'http://localhost:8080/news/{id}' \
+--header 'Content-Type: application/json'
+```
+***Получение комментариев новости***
+```bash
+curl --location --request GET 'http://localhost:8080/news/{id}/comments/' \
+--header 'Content-Type: application/json'
+```
+***Добавление комментария к новости***
+```bash
+curl --location --request POST 'http://localhost:8080/news/{id}/comments/' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "newsId": 1,
+    "content": "asdsadqwert",
+    "parentId": 0
+}'
 ```
